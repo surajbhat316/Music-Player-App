@@ -1,0 +1,70 @@
+.artist-description{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 90%;
+    margin: auto;
+    font-size: 12px;
+    overflow: auto;
+    padding: 20px;
+    padding-top: 40px;
+    line-height: 19px;
+}
+
+.button-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+}
+.button-group button{
+    font-size: 12px;
+    margin: 0px 2px;
+}
+
+.song-card{
+    margin: 10px 0px;
+}
+
+#song-list{
+    height: 65vh;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+#song-list::-webkit-scrollbar{
+    display: none;
+}
+
+#song-list {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+
+/* Similar Artists Section */
+
+#header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 100px 0px 0px 0px;
+}
+
+.intro-section{
+    height: 50vh;
+    margin: 100px 0px 0px 0px;
+}
+
+.intro-image-container{
+    position: relative;
+    left: -10px;
+    width: 60%;
+    height: 100%;
+    margin: 20px;
+}
+
+.display-none-small-screens{
+    display: block;
+}

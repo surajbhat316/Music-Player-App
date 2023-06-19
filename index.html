@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Player</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
+    <script>
+        function hideDiv() {
+            const divElement = document.getElementById("bottom-div").style.display = "none";
+        }
+
+        function displayDiv() {
+            const divElement = document.getElementById("bottom-div").style.display = "block";
+        }
+
+        function fun1(){
+            const playElement = document.getElementsByClassName("hover-play-class");
+            if(playElement[0].classList.contains('fa-pause')){
+                playElement[0].classList.remove("fa-pause");
+                playElement[0].classList.add("fa-play");
+            }else{
+                playElement[0].classList.remove("fa-play");
+                playElement[0].classList.add("fa-pause");
+            }
+        }
+
+        function fun(){
+            console.log("Enters");
+        }
+    </script>
+
+    <style>
+
+        .hover-play{
+            display: block;
+            visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+        .img-box:hover .hover-play{
+            visibility: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <span><i class="fa-solid fa-music"></i></span>&nbsp;
+                Ninja <b>Studio</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"><i class="fa-light fa-bars"></i></span> -->
+                <span><i class="fa-solid fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Favourites</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bottom media player container div -->
+    <div id="bottom-div" style="display: none;">
+        <div class="audio-container container-fluid my-3">
+            <div class="row ">
+                <div class="col-2 d-flex ">
+                    <div style="display: flex;flex-direction: row;">
+                        <img style="position: relative;top: -5px; margin-left: -5px;"
+                            src="images/album-covers/encore.jpg" alt="" width="50px" height="50px">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="song-info d-flex flex-column">
+                                        <p>Encore</p>
+                                        <p style="font-size: 11px;">Eminem</p>
+                                    </div>
+                                </div>
+                                <div class="col-2 mx-2 mx-sm-0">
+                                    <div style="margin-top: -7px; margin-left: 2px;">
+                                        <i class="fa-regular fa-heart" style="color: #ffffff; font-size: small;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offset-4 offset-sm-0 mx-sm-5 col-6">
+                    <div class="d-flex justify-content-center">
+                        <div style="width: 100%;" class="d-flex flex-column justify-content-center align-items-center">
+                            <audio id="player" src=""></audio>
+                            <div>
+                                <button style="background-color: inherit;border: 1px solid white; "
+                                    onclick="document.getElementById('player').play()"
+                                    class="btn btn-primary mx-2"><span><i class="fa-solid fa-play"></i></span></button>
+                                <button style="background-color: inherit;border: 1px solid white; " onclick="hideDiv()"
+                                    class="btn btn-primary mx-1"><span><i class="fa-sharp fa-solid fa-xmark"></i></span></button>
+                            </div>
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="100" value="10" class="slider" id="myRange">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container main-part">
+        <div class="row row-gap-3 mt-5">
+            <div class="col-12 col-sm-9 order-1 order-sm-1">
+                <!-- Main section -->
+                <main> 
+                    <!-- Carusel Section -->
+                    <section id="carusel">
+                        <div class="img-container">
+                            <img src="images/carusel-img-daily-remix.jpg" alt="">
+                        </div>
+
+                        <div class="img-container">
+                            <img src="images/carusel-img-bruno-mars.jfif" alt="">
+                        </div>
+
+                        <div class="img-container">
+                            <img src="images/carusel-img-cold-play.jfif" alt="">
+                        </div>
+                    </section>
+
+                    <!-- Latest Release  Section -->
+                    <section id="latest-releases" class="standard-padding-margin">
+                        <h4>Latest Releases</h4>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 d-flex flex-row song">
+                                    <!-- Default dropstart button -->
+                                    <div class="dropstart" style="position: absolute;top:10px; right: 20px;">
+                                        <i class=" btn fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown"
+                                            aria-expanded="false" style="color: #ffffff;"></i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li><button class="dropdown-item" type="button">Play</button></li>
+                                            <li><button class="dropdown-item" type="button">Add to Queue</button></li>
+                                            <li><button class="dropdown-item" type="button">Add to Favourites</button>
+                                            </li>
+                                            <li><button class="dropdown-item" type="button">Get Info</button></li>
+                                        </ul>
+                                    </div>
+                                    <div class="img-box" onclick="displayDiv()">
+                                        <div id="" class="hover-play" onclick="fun()">
+                                            <i style="font-size: 22px;" id="hover-play-id" class="hover-play-class fa-solid fa-play"></i>
+                                        </div>
+                                        <img src="images/album-covers/encore.jpg" alt="">
+                                    </div>
+                                    <div class="song-description">
+                                        <p>Song 1</p>
+                                        <p>1-Jan-2012</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 d-flex flex-row song">
+                                    <!-- Default dropstart button -->
+                                    <div class="dropstart" style="position: absolute;top:10px; right: 20px;">
+                                        <i class=" btn fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown"
+                                            aria-expanded="false" style="color: #ffffff;"></i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li><button class="dropdown-item" type="button">Play</button></li>
+                                            <li><button class="dropdown-item" type="button">Add to Queue</button></li>
+                                            <li><button class="dropdown-item" type="button">Add to Favourites</button>
+                                            </li>
+                                            <li><button class="dropdown-item" type="button">Get Info</button></li>
+                                        </ul>
+                                    </div>
+                                    <div class="img-box" onclick="displayDiv()">
+                                        <div id="" class="hover-play" onclick="fun1()">
+                                            <i style="font-size: 22px;" id="hover-play-id" class="hover-play-class fa-solid fa-play"></i>
+                                        </div>
+                                        <img src="images/album-covers/encore.jpg" alt="">
+                                    </div>
+                                    <div class="song-description">
+                                        <p>Song 1</p>
+                                        <p>1-Jan-2012</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 d-flex flex-row song">
+                                    <!-- Default dropstart button -->
+                                    <div class="dropstart" style="position: absolute;top:10px; right: 20px;">
+                                        <i class=" btn fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown"
+                                            aria-expanded="false" style="color: #ffffff;"></i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li><button class="dropdown-item" type="button">Play</button></li>
+                                            <li><button class="dropdown-item" type="button">Add to Queue</button></li>
+                                            <li><button class="dropdown-item" type="button">Add to Favourites</button>
+                                            </li>
+                                            <li><button class="dropdown-item" type="button">Get Info</button></li>
+                                        </ul>
+                                    </div>
+                                    <div class="img-box" onclick="displayDiv()">
+                                        <div id="" class="hover-play" onclick="fun1()">
+                                            <i style="font-size: 22px;" id="hover-play-id" class="hover-play-class fa-solid fa-play"></i>
+                                        </div>
+                                        <img src="images/album-covers/encore.jpg" alt="">
+                                    </div>
+                                    <div class="song-description">
+                                        <p>Song 1</p>
+                                        <p>1-Jan-2012</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 d-flex flex-row song">
+                                    <!-- Default dropstart button -->
+                                    <div class="dropstart" style="position: absolute;top:10px; right: 20px;">
+                                        <i class=" btn fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown"
+                                            aria-expanded="false" style="color: #ffffff;"></i>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li><button class="dropdown-item" type="button">Play</button></li>
+                                            <li><button class="dropdown-item" type="button">Add to Queue</button></li>
+                                            <li><button class="dropdown-item" type="button">Add to Favourites</button>
+                                            </li>
+                                            <li><button class="dropdown-item" type="button">Get Info</button></li>
+                                        </ul>
+                                    </div>
+                                    <div class="img-box" onclick="displayDiv()">
+                                        <div id="" class="hover-play" onclick="fun1()">
+                                            <i style="font-size: 22px;" id="hover-play-id" class="hover-play-class fa-solid fa-play"></i>
+                                        </div>
+                                        <img src="images/album-covers/encore.jpg" alt="">
+                                    </div>
+                                    <div class="song-description">
+                                        <p>Song 1</p>
+                                        <p>1-Jan-2012</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Popular Artists Section -->
+                    <section id="popular-artists" class="standard-padding-margin">
+                        <h4>Popular Artists</h4>
+                        <div class=" artist-container">
+                            <div class="artist">
+                                <div class="standard-img-container">
+                                    <a href="artistPage.html"><img src="images/artists/ed-sheeran.jpg" alt=""></a>
+                                </div>
+                                <p class="text-center m-2">Ed Sheeran</p>
+                            </div>
+                            <div class="artist">
+                                <div class="standard-img-container">
+                                    <img src="images/artists/adam-levine.jpg" alt="">
+                                </div>
+                                <p class="text-center m-2">Maroon 5</p>
+                            </div>
+                            <div class="artist">
+                                <div class="standard-img-container">
+                                    <img src="images/artists/camila-cabello.jfif" alt="">
+                                </div>
+                                <p class="text-center m-2">Camila Cabello</p>
+                            </div>
+                            <div class="artist">
+                                <div class="standard-img-container">
+                                    <img src="images/artists/eminem.jfif" alt="">
+                                </div>
+                                <p class="text-center m-2">Eminem</p>
+                            </div>
+                            <div class="artist">
+                                <div class="standard-img-container">
+                                    <img src="images/artists/taylor-swift.jfif" alt="">
+                                </div>
+                                <p class="text-center m-2">Taylor Swift</p>
+                            </div>
+                            <div class="artist">
+                                <div class="standard-img-container">
+                                    <img src="images/album-covers/encore.jpg" alt="">
+                                </div>
+                                <p class="text-center m-2">Ed Sheeran</p>
+                            </div>
+                            <div class="artist">
+                                <div class="standard-img-container">
+                                    <img src="images/album-covers/encore.jpg" alt="">
+                                </div>
+                                <p class="text-center m-2">Ed Sheeran</p>
+                            </div>
+
+                        </div>
+
+
+                    </section>
+
+                    <!-- Popular Radio Stations Section -->
+                    <section id="radio-stations">
+                        <div class="radio-stations-container standard-padding-margin d-flex flex-row"
+                            style="background-color: rgb(28 8 73);">
+                            <div>
+                                <div style="position: relative; width: 130px; height: 100px; margin: 0px 0px;">
+                                    <img style="width: 100%; height: 100%;"
+                                        src="images/radio-stations/radio-stations.jfif" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-flex flex-row justify-content-center align-items-center"
+                                    style="position: absolute;z-index: 2;">
+                                    <p>Love</p>
+                                </div>
+                                <div class="standard-img-container" style="position: relative;">
+                                    <img style="opacity: 0.7;" src="images/radio-stations/love.jpg" alt="">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="d-flex flex-row justify-content-center align-items-center"
+                                    style="position: absolute;z-index: 2;">
+                                    <p>Retro</p>
+                                </div>
+                                <div class="standard-img-container" style="position: relative;">
+                                    <img style="opacity: 0.7;" src="images/radio-stations/retro.jpg" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-flex flex-row justify-content-center align-items-center"
+                                    style="position: absolute;z-index: 2;">
+                                    <p>Chill</p>
+                                </div>
+                                <div class="standard-img-container" style="position: relative;">
+                                    <img style="opacity: 0.7;" src="images/radio-stations/chill.jpg" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-flex flex-row justify-content-center align-items-center"
+                                    style="position: absolute;z-index: 2;">
+                                    <p>Workout</p>
+                                </div>
+                                <div class="standard-img-container" style="position: relative;">
+                                    <img style="opacity: 0.7;" src="images/radio-stations/workout.jfif" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-flex flex-row justify-content-center align-items-center"
+                                    style="position: absolute;z-index: 2;">
+                                    <p>Rock</p>
+                                </div>
+                                <div class="standard-img-container" style="position: relative;">
+                                    <img style="opacity: 0.7;" src="images/radio-stations/rock.jpg" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-flex flex-row justify-content-center align-items-center"
+                                    style="position: absolute;z-index: 2;">
+                                    <p>Pop</p>
+                                </div>
+                                <div class="standard-img-container" style="position: relative;">
+                                    <img style="opacity: 0.7;" src="images/radio-stations/pop.jpg" alt="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- Themes Section -->
+                    <section id="themes">
+
+                        <div class="img-container">
+                            <p style="position: absolute; left: 40%; top: 75%; font-size: 21px;">Party</p>
+                            <div class="image" style="background-image: url(images/themes/party.jfif);">
+                            </div>
+
+                        </div>
+
+
+                        <div class="img-container">
+                            <p style="position: absolute; left: 35%; top: 75%; font-size: 21px;">Electronic</p>
+                            <div class="image" style="background-image: url(images/themes/elecronic.jfif);">
+                            </div>
+                        </div>
+
+
+                        <div class="img-container">
+                            <p style="position: absolute; left: 35%; top: 75%; font-size: 21px;">Road Trip</p>
+                            <div class="image" style="background-image: url(images/themes/road-trip.jpg);">
+                            </div>
+                        </div>
+
+
+                    </section>
+
+                    <!-- Latest English Section -->
+                    <section id="latest-english" class="standard-padding-margin">
+                        <h4>Latest English</h4>
+                        <div class="latest-song-container">
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- Latest Hindi Section -->
+                    <section id="latest-hindi" class="standard-padding-margin">
+                        <h4>Latest Hindi</h4>
+                        <div class="latest-song-container">
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                            <div class="playlist">
+                                <div class="playlist-img">
+                                    <img src="images/artists/ed-sheeran.jpg" alt="">
+                                </div>
+                                <p>Onism</p>
+                                <p>Aug-11-2017</p>
+                            </div>
+                    </section>
+
+                </main>
+            </div>
+            <div id="aside-section" class="d-none d-sm-block col-12 col-sm-3 order-2 order-sm-2"
+                style="position: fixed; right: 5%; height: auto; margin: 20px 0px;">
+                <div class="aside-section-header">
+                    <h5>Queue</h5>
+                    <!-- <p>Queues</p> -->
+
+                    <!-- Default dropstart button -->
+                    <div class="dropstart" style="position: absolute;top:5px; right: 20px;">
+                        <i class=" btn fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="color: #ffffff;"></i>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><button class="dropdown-item" type="button">Play All</button></li>
+                            <li><button class="dropdown-item" type="button">Get Info</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="aside-container" class="p-2 aside-container-hidden" style=" height: 65vh;overflow: auto;background-color: #1b1535;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+
+                            <div class="col-2 mt-2">
+                                <div style="width: 40px; height: 40px; background-color: red; margin: 2px;">
+                                    <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-8 mt-2">
+                                <div style="line-height: 0.3rem;">
+                                    <h6>Song Name</h6>
+                                    <p style="font-size: 14px;">Artist Name</p>
+                                </div>
+                            </div>
+                            <div class="col-2 mt-2">
+                                <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <button style="background-color: inherit; color : white;border-radius: 50%;" id="queue" name="queue-hidden" class="btn btn-primary"
+        type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <span><i class="fa-solid fa-chevron-left"></i></span></button>
+
+    <div style="background-color: #1b1535;" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel">
+        <div style="color: white;" class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Queue</h5>
+            <button style="background-color: white;" type="button" class="btn-close text-reset"
+                data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" style="background-color:#1b1535;">
+            <div id="aside-container" class="p-2" style="height: 65vh;overflow: auto;background-color: #2c2252;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+
+                        <div class="col-2 mt-2">
+                            <div style="width: 40px; height: 40px; margin: 2px;">
+                                <img src="images/carusel-img-bruno-mars.jfif" alt="" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <div class="col-8 mt-2">
+                            <div style="color: white;line-height: 0.3rem;">
+                                <h6>Uptown funk</h6>
+                                <p style="font-size: 14px;">Bruno Mars</p>
+                            </div>
+                        </div>
+                        <div class="col-2 mt-2">
+                            <i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
